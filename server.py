@@ -1,6 +1,7 @@
 import os
 import uu
 import json
+import base64
 import logging
 import youtube_dl
 from flask import Flask, send_file, make_response, render_template, request, redirect, url_for
@@ -29,25 +30,16 @@ def send():
     with YTDL:
         YTDL.download([url])
 
-    logging.info(ytid)
+    logging.info("VIDEO ID: " + ytid)
 
-    # return redirect(url_for(ytid + ".mp4"))
+    with open(f"media/{ytid}.mp4", "rb") as video:
+        raw = video.read()
 
-    # return json.dumps({
-    #     "redirect": ytid + ".mp4"
-    # })
-
-    uu.encode(f"media/{ytid}.mp4", f"text/{ytid}.txt")
-    with open(f"text/{ytid}.txt", "r") as file:
-        txt = file.read()
-
-    # html = render_template(
-    #     "video.html",
-    #     path = "/app/media/" + ytid + ".mp4"
-    # )
+    b64 = base64.b64encode(raw)
+    uri = b64.decode("utf-8")
 
     return json.dumps({
-        "txt": txt
+        "uri": uri
     })
 
 
