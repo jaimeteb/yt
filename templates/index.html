@@ -15,6 +15,9 @@
       let uri;
 
       $(".input-button").click(function() {
+        $(".video").html(
+          '<img src="https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif">'
+        );
         $.ajax({
           type: "POST",
           contentType: "application/json",
