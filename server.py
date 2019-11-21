@@ -35,6 +35,8 @@ def send():
     with open(f"media/{ytid}.mp4", "rb") as video:
         raw = video.read()
 
+    os.remove(f"media/{ytid}.mp4")
+
     b64 = base64.b64encode(raw)
     uri = b64.decode("utf-8")
 
