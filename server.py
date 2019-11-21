@@ -1,4 +1,5 @@
 import os
+import uu
 import json
 import logging
 import youtube_dl
@@ -36,13 +37,17 @@ def send():
     #     "redirect": ytid + ".mp4"
     # })
 
-    html = render_template(
-        "video.html",
-        path = "/app/media/" + ytid + ".mp4"
-    )
+    uu.encode(f"media/{ytid}.mp4", f"text/{ytid}.txt")
+    with open(f"text/{ytid}.txt", "r") as file:
+        txt = file.read()
+
+    # html = render_template(
+    #     "video.html",
+    #     path = "/app/media/" + ytid + ".mp4"
+    # )
 
     return json.dumps({
-        "html": html
+        "txt": txt
     })
 
 
