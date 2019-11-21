@@ -7,4 +7,5 @@ ADD . /app
 
 EXPOSE 5000
 
-CMD ["python", "server.py"]
+ENTRYPOINT  ["gunicorn"]
+CMD ["-c", "gunicorn.py", "server:app"]
