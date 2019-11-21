@@ -26,7 +26,7 @@
           success : function(result) {
             uri = "data:video/mp4;base64," + result["uri"];
             $(".video").html(
-              `<video src="${uri}" autoplay controls style="height: 100%"></video>`
+              `<video src="${uri}" autoplay controls style="max-width: 100%"></video>`
             );
           }
         });
