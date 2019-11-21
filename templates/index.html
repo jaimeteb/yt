@@ -8,6 +8,9 @@
   <body>
     <input class="input-video" type="text">
     <button class="input-button" type="button">Send</button>
+    <div class="video">
+      <!-- video -->
+    </div>
     <script type="text/javascript">
       $(".input-button").click(function() {
         $.ajax({
@@ -19,7 +22,8 @@
             "url": $(".input-video").val()
           }),
           success : function(result) {
-            console.log(result);
+            // console.log(result);
+            $(".video").html(result["html"]);
           }
         });
       });

@@ -29,9 +29,20 @@ def send():
         YTDL.download([url])
 
     logging.info(ytid)
+
     # return redirect(url_for(ytid + ".mp4"))
+
+    # return json.dumps({
+    #     "redirect": ytid + ".mp4"
+    # })
+
+    html = render_template(
+        "video.html",
+        path = "/app/media/" + ytid + ".mp4"
+    )
+
     return json.dumps({
-        "redirect": ytid + ".mp4"
+        "html": html
     })
 
 
