@@ -12,8 +12,8 @@
       <!-- video -->
     </div>
     <script type="text/javascript">
-      let txt;
-      
+      let uri;
+
       $(".input-button").click(function() {
         $.ajax({
           type: "POST",
@@ -26,7 +26,7 @@
           success : function(result) {
             // console.log(result);
             // $(".video").html(result["html"]);
-            txt = result["txt"];
+            uri = result["uri"];
           }
         });
       });
