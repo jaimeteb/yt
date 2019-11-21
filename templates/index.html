@@ -24,11 +24,9 @@
             "url": $(".input-video").val()
           }),
           success : function(result) {
-            // console.log(result);
-            // $(".video").html(result["html"]);
             uri = "data:video/mp4;base64," + result["uri"];
             $(".video").html(
-              `<video src="${uri}" autoplay></video>`
+              `<video src="${uri}" autoplay controls style="height: 100%"></video>`
             );
           }
         });
