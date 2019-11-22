@@ -66,7 +66,7 @@ def search():
 
     results = []
     for filename in glob.glob(f"/app/json/{searchid}_*.info.json"):
-        with open(file, "r") as file:
+        with open(filename, "r") as file:
             info = json.load(file)
 
         thumb = info["thumbnail"]
