@@ -14,10 +14,8 @@ app = Flask(
     __name__,
     template_folder="templates"
 )
+
 MEDIA_PATH = 'media/'
-
-YTDL = YoutubeDL({'outtmpl': '/app/media/%(id)s.%(ext)s'})
-
 
 @app.route("/")
 def index():
@@ -30,8 +28,12 @@ def send():
     url = data["url"]
     ytid = url[url.find("=")+1:]
 
-    with YTDL:
-        YTDL.download([url])
+    config = {
+        "outtmpl": "/app/media/%(id)s.%(ext)s"
+    }
+
+    with YoutubeDL(config) as ytdl:
+        ytdl.download([url])
 
     logging.info("VIDEO ID: " + ytid)
 
