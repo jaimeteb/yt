@@ -29,10 +29,10 @@
       <div class="col-sm-8">
         <div class="row m-3 w-50">
           <div class="col-sm-8">
-            <input class="form-control input-video" type="text">
+            <input class="form-control play-video" type="text">
           </div>
           <div class="col-sm-4">
-            <button class="btn btn-secondary input-button" type="button">Play</button>
+            <button class="btn btn-secondary play-button" type="button">Play</button>
           </div>
         </div>
 
@@ -70,7 +70,7 @@
         });
       });
 
-      $(".input-button").click(function() {
+      $(".play-button").click(function() {
         $(".video").html(
           '<img src="https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif">'
         );
@@ -80,7 +80,7 @@
           url: "http://104.214.54.171/play",
           dataType : "json",
           data : JSON.stringify({
-            "url": $(".input-video").val()
+            "url": $(".play-video").val()
           }),
           success : function(result) {
             uri = "data:video/mp4;base64," + result["uri"];
@@ -91,11 +91,17 @@
         });
       });
 
-      $('.input-video').keypress(function (e) {
+      $("body").on("click", ".search-result", function() {
+        var url = $(this).attr("url");
+        $(".play-video").val(url);
+        $(".play-button").click();
+      });
+
+      $('.play-video').keypress(function (e) {
        var key = e.which;
        if(key == 13)  // the enter key code
         {
-          $('.input-button').click();
+          $('.play-button').click();
           return false;
         }
       });
