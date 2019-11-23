@@ -46,7 +46,8 @@ def play():
     uri = b64.decode("utf-8")
 
     return json.dumps({
-        "uri": uri
+        "uri": uri,
+        # "title": title
     })
 
 
