@@ -22,8 +22,8 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/send", methods=["POST"])
-def send():
+@app.route("/play", methods=["POST"])
+def play():
     data = request.get_json()
     url = data["url"]
     ytid = url[url.find("=")+1:]
@@ -81,6 +81,7 @@ def search():
             "url": url
         })
 
+    logging.info("SEARCH SUCCESSFUL")
     return json.dumps({
         "results": results
     })

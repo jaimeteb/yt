@@ -3,16 +3,64 @@
   <head>
     <title></title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <input class="input-video" style="width: 300px" type="text">
-    <button class="input-button" type="button">Send</button>
-    <div class="video">
-      <!-- video -->
+    <div class="row w-100">
+      <div class="col-sm-4">
+        <div class="row m-3 w-100">
+          <div class="col-sm-8">
+            <input class="form-control search-video" type="text">
+          </div>
+          <div class="col-sm-4">
+            <button class="btn btn-primary search-button" type="button">Search</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-8">
+        <div class="row m-3 w-50">
+          <div class="col-sm-8">
+            <input class="form-control input-video" type="text">
+          </div>
+          <div class="col-sm-4">
+            <button class="btn btn-secondary input-button" type="button">Play</button>
+          </div>
+        </div>
+
+        <div class="row m-3 w-100">
+          <div class="container video border">
+
+          </div>
+        </div>
+      </div>
     </div>
     <script type="text/javascript">
       let uri;
+
+      $(".search-button").click(function() {
+        // $(".video").html(
+        //   '<img src="https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif">'
+        // );
+        $.ajax({
+          type: "POST",
+          contentType: "application/json",
+          url: "http://104.214.54.171/search",
+          dataType : "json",
+          data : JSON.stringify({
+            "query": $(".search-video").val()
+          }),
+          success : function(result) {
+            // uri = "data:video/mp4;base64," + result["uri"];
+            // $(".video").html(
+            //   `<video src="${uri}" autoplay controls style="max-width: 100%"></video>`
+            // );
+            console.log(result["results"]);
+          }
+        });
+      });
 
       $(".input-button").click(function() {
         $(".video").html(
@@ -21,7 +69,7 @@
         $.ajax({
           type: "POST",
           contentType: "application/json",
-          url: "http://104.214.54.171/send",
+          url: "http://104.214.54.171/play",
           dataType : "json",
           data : JSON.stringify({
             "url": $(".input-video").val()
@@ -40,6 +88,15 @@
        if(key == 13)  // the enter key code
         {
           $('.input-button').click();
+          return false;
+        }
+      });
+
+      $('.search-video').keypress(function (e) {
+       var key = e.which;
+       if(key == 13)  // the enter key code
+        {
+          $('.search-button').click();
           return false;
         }
       });
