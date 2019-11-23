@@ -1,0 +1,15 @@
+{% for thumb, title, url, cnf in results %}
+<div class="card ml-3 mr-3 mt-3">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{ thumb }}" class="card-img">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ title }}</h5>
+        <p class="card-text">{{ url }} %</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}

@@ -82,8 +82,14 @@ def search():
         })
 
     logging.info("SEARCH SUCCESSFUL")
+
+    html = render_template(
+        "results.html",
+        results = [(r["thumb"], r["title"], r["url"]) for r in results]
+    )
+
     return json.dumps({
-        "results": results
+        "results": html
     })
 
 
