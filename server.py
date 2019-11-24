@@ -68,7 +68,8 @@ def search():
         "default_search": "ytsearch5",
         "outtmpl": f"/app/json/{searchid}_%(id)s",
         "skip_download": True,
-        "writeinfojson": True
+        "writeinfojson": True,
+        "ignoreerrors": True
     }
 
     with YoutubeDL(search_config) as ytdl:
