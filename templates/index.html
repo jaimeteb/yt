@@ -50,9 +50,11 @@
       let uri;
 
       $(".search-button").click(function() {
-        // $(".video").html(
-        //   '<img src="https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif">'
-        // );
+        $(".search-results").html(
+          '<div class="row" style="justify-content: center;">
+            <img src="https://gifimage.net/wp-content/uploads/2017/10/colorful-loader-gif-transparent-13.gif">
+           </div>'
+        );
         $.ajax({
           type: "POST",
           contentType: "application/json",
@@ -62,12 +64,6 @@
             "query": $(".search-video").val()
           }),
           success : function(result) {
-            // uri = "data:video/mp4;base64," + result["uri"];
-            // $(".video").html(
-            //   `<video src="${uri}" autoplay controls style="max-width: 100%"></video>`
-            // );
-            console.log(result["results"]);
-
             $(".search-results").html(result["results"]);
           }
         });
@@ -75,7 +71,9 @@
 
       $(".play-button").click(function() {
         $(".video").html(
-          '<img src="https://media.giphy.com/media/sSgvbe1m3n93G/giphy.gif">'
+          '<div class="row" style="justify-content: center;">
+            <img src="https://gifimage.net/wp-content/uploads/2017/10/colorful-loader-gif-transparent-13.gif">
+           </div>'
         );
         $.ajax({
           type: "POST",
