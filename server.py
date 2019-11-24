@@ -35,7 +35,7 @@ def play():
 
     with YoutubeDL(config) as ytdl:
         ytdl.download([url])
-        info_dict = ydl.extract_info(url, download=False)
+        info_dict = ytdl.extract_info(url, download=False)
         logging.info("INFO DICT:\n")
         logging.info(json.dumps(info_dict, indent=4))
         # video_url = info_dict.get("url", None)
