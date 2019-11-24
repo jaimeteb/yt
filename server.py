@@ -27,6 +27,7 @@ def play():
     data = request.get_json()
     url = data["url"]
     ytid = url[url.find("=")+1:]
+    # playid = str(uuid.uuid4())[-8:]
 
     config = {
         "outtmpl": "/app/media/%(id)s.%(ext)s"
@@ -34,6 +35,12 @@ def play():
 
     with YoutubeDL(config) as ytdl:
         ytdl.download([url])
+        info_dict = ydl.extract_info(url, download=False)
+        logging.info("INFO DICT:\n")
+        logging.info(json.dumps(info_dict, indent=4))
+        # video_url = info_dict.get("url", None)
+        # video_id = info_dict.get("id", None)
+        video_title = info_dict.get('title', None)
 
     logging.info("VIDEO ID: " + ytid)
 
@@ -47,7 +54,7 @@ def play():
 
     return json.dumps({
         "uri": uri,
-        # "title": title
+        "title": video_title
     })
 
 

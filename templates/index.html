@@ -37,14 +37,12 @@
           </div>
         </div>
 
-        <div class="row mb-3 ml-3">
+        <div class="row m-3">
           <h2 class="video-title"></h2>
         </div>
 
         <div class="row m-3 w-100">
-          <div class="container video border">
-
-          </div>
+          <div class="container video border roundeds"></div>
         </div>
       </div>
     </div>
@@ -92,7 +90,7 @@
             $(".video").html(
               `<video src="${uri}" autoplay controls style="max-width: 100%"></video>`
             );
-            $(".video-title").html("Video Title");
+            $(".video-title").html(result["title"]);
           }
         });
       });
