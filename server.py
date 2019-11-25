@@ -85,7 +85,9 @@ def search():
         "skip_download": True,
         "writeinfojson": True,
         "ignoreerrors": True,
-        "verbose": True
+        "verbose": True,
+        "username": "jaimeteb@gmail.com",
+        "password": "Jaimetb1428"
     }
 
     with YoutubeDL(search_config) as ytdl:
