@@ -7,6 +7,7 @@ import logging
 
 from youtube_dl import YoutubeDL
 from flask import Flask, render_template, request
+from urllib import request as urlreq
 
 logging.basicConfig(level=logging.INFO)
 
@@ -16,6 +17,19 @@ app = Flask(
 )
 
 MEDIA_PATH = 'media/'
+
+
+def thumb64(url):
+    urlreq.urlretrieve(url, "/app/media/thumb.jpg")
+    with open("/app/media/thumb.jpg", "rb") as image:
+        raw = image.read()
+
+    os.remove("/app/media/thumb.jpg")
+
+    b64 = base64.b64encode(raw)
+    uri = b64.decode("utf-8")
+    return uri
+
 
 @app.route("/")
 def index():
@@ -85,11 +99,14 @@ def search():
         url = info["webpage_url"]
 
         results.append({
-            "thumb": thumb,
+            "thumb": thumb64(thumb),
             "title": title,
             "url": url
         })
 
+        os.remove(filename)
+
+        
     logging.info("SEARCH SUCCESSFUL")
 
     html = render_template(
