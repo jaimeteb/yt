@@ -44,7 +44,8 @@ def play():
     # playid = str(uuid.uuid4())[-8:]
 
     config = {
-        "outtmpl": "/app/media/%(id)s.%(ext)s"
+        "outtmpl": "/app/media/%(id)s.%(ext)s",
+        "verbose": True
     }
 
     with YoutubeDL(config) as ytdl:
@@ -83,7 +84,8 @@ def search():
         "outtmpl": f"/app/json/{searchid}_%(id)s",
         "skip_download": True,
         "writeinfojson": True,
-        "ignoreerrors": True
+        "ignoreerrors": True,
+        "verbose": True
     }
 
     with YoutubeDL(search_config) as ytdl:
@@ -106,7 +108,7 @@ def search():
 
         os.remove(filename)
 
-        
+
     logging.info("SEARCH SUCCESSFUL")
 
     html = render_template(
