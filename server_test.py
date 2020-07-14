@@ -26,12 +26,10 @@ for filename in glob.glob(f"json/{searchid}_*.info.json"):
     with open(filename, "r") as file:
         info = json.load(file)
 
-    thumb = info["thumbnail"]
     title = info["title"]
     url = info["webpage_url"]
 
     results.append({
-        "thumb": thumb64(thumb),
         "title": title,
         "url": url
     })
