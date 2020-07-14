@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/jaimeteb/yt.svg?branch=master)](https://travis-ci.com/jaimeteb/yt)
+---
+
 # YT
 YouTube videos as mp4 in a simple web application.
 
