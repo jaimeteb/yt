@@ -11,7 +11,7 @@ searchid = str(uuid.uuid4())[-8:]
 
 search_config = {
     "default_search": "ytsearch5",
-    "outtmpl": f"/app/json/{searchid}_%(id)s",
+    "outtmpl": f"json/{searchid}_%(id)s",
     "skip_download": True,
     "writeinfojson": True,
     "ignoreerrors": True,
@@ -22,7 +22,7 @@ with YoutubeDL(search_config) as ytdl:
     ytdl.download([query])
 
 results = []
-for filename in glob.glob(f"/app/json/{searchid}_*.info.json"):
+for filename in glob.glob(f"json/{searchid}_*.info.json"):
     with open(filename, "r") as file:
         info = json.load(file)
 
