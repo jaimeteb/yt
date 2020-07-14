@@ -49,32 +49,36 @@
     <script type="text/javascript">
       let uri;
 
+      const loadingGif = '<div class="row w-100" style="justify-content: center;"><img class="h-50" src="https://thumbs.gfycat.com/ClutteredNimbleAurochs-size_restricted.gif"></div>'
+      const errorMsg = '<div class="row w-100" style="justify-content: center;"><h2>Something went wrong. Please try again.</h2></div>'
+
       $(".search-button").click(function() {
-        $(".search-results").html(
-          '<div class="row w-100" style="justify-content: center;"><img class="h-50" src="https://thumbs.gfycat.com/ClutteredNimbleAurochs-size_restricted.gif"></div>'
-        );
+        $(".search-results").html(loadingGif);
         $.ajax({
           type: "POST",
           contentType: "application/json",
-          url: "http://104.214.54.171/search",
+          url: "/search",
           dataType : "json",
           data : JSON.stringify({
             "query": $(".search-video").val()
           }),
           success : function(result) {
             $(".search-results").html(result["results"]);
+            $(".video").html("")
+          },
+          error: function(result) {
+            $(".search-results").html("");
+            $(".video").html(errorMsg);
           }
         });
       });
 
       $(".play-button").click(function() {
-        $(".video").html(
-          '<div class="row w-100" style="justify-content: center;"><img class="h-50" src="https://thumbs.gfycat.com/ClutteredNimbleAurochs-size_restricted.gif"></div>'
-        );
+        $(".video").html(loadingGif);
         $.ajax({
           type: "POST",
           contentType: "application/json",
-          url: "http://104.214.54.171/play",
+          url: "/play",
           dataType : "json",
           data : JSON.stringify({
             "url": $(".play-video").val()
@@ -85,6 +89,9 @@
               `<video src="${uri}" autoplay controls style="max-width: 100%"></video>`
             );
             $(".video-title").html(result["title"]);
+          },
+          error: function(result) {
+            $(".video").html(errorMsg);
           }
         });
       });
